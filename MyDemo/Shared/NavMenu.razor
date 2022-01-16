@@ -1,0 +1,19 @@
+﻿@using MudBlazor
+<MudDrawer @bind-Open="SideBarOpen" Elevation="1">
+    <MudDrawerHeader>
+        
+        <MudText Typo="Typo.h5" Color="Color.Primary" Style="margin-top:10px; margin-left:15px;">MyDemo</MudText>
+    </MudDrawerHeader>
+    <MudNavMenu>
+        <MudNavLink Href="/" Match="NavLinkMatch.All" Icon="@Icons.Filled.Home">Home</MudNavLink>
+        <MudNavLink Href="/classes" Icon="@Icons.Filled.Class">Classes</MudNavLink>
+        <MudNavLink Href="/countries" Match="NavLinkMatch.All" Icon="@Icons.Filled.Flag">Countries</MudNavLink>
+        <MudNavLink Href="/students" Icon="@Icons.Filled.Person">Students</MudNavLink>
+        <MudNavLink Href="/dashboard" Match="NavLinkMatch.All" Icon="@Icons.Filled.Report">Analytic</MudNavLink>
+       
+    </MudNavMenu>
+</MudDrawer>
+@code {
+    [Parameter]
+    public bool SideBarOpen { get; set; }
+}

@@ -1,0 +1,78 @@
+﻿
+@page "/students"
+@using System.Net.Http.Json
+@using MudBlazor
+@using MyDemo.Model
+@inject MudBlazor.ISnackbar snackBar
+
+
+<MudCard Elevation="25">
+    <MudCardHeader>
+        <CardHeaderContent>
+            <MudText Typo="Typo.h6">Add / Edit Students</MudText>
+        </CardHeaderContent>
+    </MudCardHeader>
+    <MudCardContent>
+        
+        <MudSelect T="Countries" @bind-Value="@Students.CountryId" Label="Select Country" Variant="Variant.Outlined" ToStringFunc="@Converter" AnchorOrigin="Origin.BottomCenter">
+     
+            <Virtualize Items="LstCountries" Context="item">
+                <MudSelectItem Value="@(@item)">
+                
+            </MudSelectItem>
+            </Virtualize>
+            
+            
+        </MudSelect>
+        <MudSelect T="Classes" @bind-Value="@Students.ClassId" Label="Select Class" Variant="Variant.Outlined" ToStringFunc="@ConverterClass" AnchorOrigin="Origin.BottomCenter">
+     
+            <Virtualize Items="LstClasses" Context="item">
+                <MudSelectItem Value="@(@item)">
+                
+            </MudSelectItem>
+            </Virtualize>
+            
+            
+        </MudSelect>
+        <MudTextField @bind-Value="Students.Name" Label="Student Name" Variant="Variant.Text" Margin="Margin.Normal"></MudTextField>
+       
+        <br />
+        
+        <br />
+        <MudButton Variant="Variant.Filled" Color="Color.Success" OnClick="HandleValidSubmit">Save Student</MudButton>
+    </MudCardContent>
+</MudCard>
+<br />
+<MudTable Elevation="25" Items="LstStudent">
+    
+    <HeaderContent>
+        <MudTh>Student Name</MudTh>
+        <MudTh>Class Name</MudTh>
+        <MudTh>Country</MudTh>
+         <MudTh>DOB</MudTh>
+        <MudTh>Created On</MudTh>
+        <MudTh>Updated On</MudTh>
+        <MudTh>Actions</MudTh>
+    </HeaderContent>
+    <RowTemplate>
+        
+         <MudTd DataLabel="StudentName">@context.Name</MudTd>
+         <MudTd DataLabel="ClassName">@(context.ClassId!=null?context.ClassId.ClassName:"N/A")</MudTd>
+         <MudTd DataLabel="CountryName">@(context.CountryId!=null?context.CountryId.Name:"N/A")</MudTd>
+         <MudTd DataLabel="CountryName">@context.DateOfBirth</MudTd>
+         <MudTd DataLabel="Created On">@context.CreatedOn</MudTd>
+         <MudTd DataLabel="Updated On">@context.UpdatedOn</MudTd>
+         <MudTd DataLabel="">
+           <MudFab @onclick="@(()=>Edit(@context.Id))" Color="Color.Primary" Icon="@Icons.Material.Filled.Edit" Size="Size.Small" IconSize="Size.Small" />
+            <MudFab @onclick="@(()=>Delete(@context.Id))" Color="Color.Secondary" Icon="@Icons.Material.Filled.Delete" Size="Size.Small" IconSize="Size.Small" />
+        </MudTd>
+    </RowTemplate>
+</MudTable>
+
+
+@code{
+    public Func<Countries, string> Converter = p => p?.Name;
+    public Func<Classes, string> ConverterClass = p => p?.ClassName;
+    public DateTime DateOfBirth { get; set; }
+}
+

@@ -1,0 +1,29 @@
+﻿@page "/dashboard"
+@using MudBlazor
+@using MyDemo.Model
+<br/>
+<h3>Average Age of Student:<b>@AverageAge</b></h3>
+<br/>
+<h3>Total Students Per Class</h3>
+<MudPaper Class="pa-4">
+    <MudChart ChartType="ChartType.Pie" InputData="@DataClasses.ToArray()" @bind-SelectedIndex="Index" InputLabels="@LabelsClasses.ToArray()" Width="300px" Height="300px" />
+</MudPaper>
+<h3>Total Students Per Country</h3>
+<MudPaper Class="pa-4">
+    <MudChart ChartType="ChartType.Pie" InputData="@DataCountries.ToArray()" @bind-SelectedIndex="Index" InputLabels="@LabelsCountries.ToArray()" Width="300px" Height="300px" />
+</MudPaper>
+<MudSpacer>
+
+</MudSpacer>
+
+@code {
+
+
+    private int Index = -1; //default value cannot be 0 -> first selectedindex is 0.
+
+   
+
+
+
+    
+}
